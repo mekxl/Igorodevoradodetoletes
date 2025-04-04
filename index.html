@@ -2,15 +2,103 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>A saga de Igor</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Aventura do Igor</title>
+  <style>
+    body {
+      font-family: monospace;
+      background-color: #111;
+      color: #eee;
+      padding: 20px;
+    }
+    #output {
+      white-space: pre-line;
+      margin-bottom: 20px;
+    }
+    button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      background: #444;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #666;
+    }
+  </style>
 </head>
 <body>
-  <div id="game-container">
-    <h1>A saga de Igor 💩</h1>
-    <p id="text"></p>
-    <div id="choices"></div>
-  </div>
-  <script src="script.js"></script>
+  <h1>Aventura de Igor: O devorador de toletes 💩</h1>
+  <div id="output"></div>
+  <div id="choices"></div>
+
+  <script>
+    const output = document.getElementById('output');
+    const choices = document.getElementById('choices');
+
+    function mostrar(texto, opcoes = []) {
+      output.innerText = texto;
+      choices.innerHTML = '';
+      opcoes.forEach(op => {
+        const btn = document.createElement('button');
+        btn.innerText = op.texto;
+        btn.onclick = op.acao;
+        choices.appendChild(btn);
+      });
+    }
+
+    function inicio() {
+      mostrar(
+        "Você acorda em um quarto escuro com um cheiro estranho no ar.\nIgor, o que você faz?",
+        [
+          { texto: 'Voltar a dormir', acao: dormir },
+          { texto: 'Comer a torrada na mesa', acao: torrada },
+          { texto: 'Provar o prato misterioso', acao: pratoMisterioso }
+        ]
+      );
+    }
+
+    function dormir() {
+      mostrar(
+        "Você tenta dormir de novo... mas seu estômago ronca e então...\n💩💥 Uma diarreia insana explode! Você perde.",
+        []
+      );
+    }
+
+    function torrada() {
+      mostrar(
+        "Você come a torrada tranquilamente... até perceber que era feita de fezes desidratadas.\n🤢 Você tem uma diarreia violenta e perde.",
+        []
+      );
+    }
+
+    function pratoMisterioso() {
+      mostrar(
+        "Você encara o prato misterioso... cheira mal, mas você prova mesmo assim.\nO gosto é familiar...\nO que você faz agora?",
+        [
+          { texto: 'Se tornar o rei das fezes', acao: reiDasFezes },
+          { texto: 'Ter uma diarreia violenta no banheiro do IF', acao: banheiroIF }
+        ]
+      );
+    }
+
+    function reiDasFezes() {
+      mostrar(
+        "Ops, parece que você é o Igor.\nVocê já é o rei das fezes. 👑💩\nFim.",
+        []
+      );
+    }
+
+    function banheiroIF() {
+      mostrar(
+        "Parabéns, Igor.\nVocê fez de novo.\nDestroçou o banheiro do IF com uma explosão de fezes.\nA diretoria te odeia.\nFim glorioso.",
+        []
+      );
+    }
+
+    // Início do jogo
+    inicio();
+  </script>
 </body>
 </html>
